@@ -1,7 +1,7 @@
 #Add cofiguration mapping for interface eth0
 allow-hotplug eth0
 mapping eth0
-    script /home/pi/mapit.sh
+    script /home/pi/eth0-mapping-config.sh
 
 #Add network configuration settings for Manual mode
 iface config-manual inet static
