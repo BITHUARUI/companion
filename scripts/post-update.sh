@@ -249,6 +249,21 @@ do
         sudo apt-get update --yes
         sudo apt-get install isc-dhcp-server=4.3.* --yes
         sudo dpkg --configure -a
+        #Copy network configuration files from Companion directory to respective configuration directories
+        sudo cp /home/pi/companion/eth0-config /etc/network/interfaces.d/
+        sudo cp /home/pi/companion/interfaces /etc/network/
+        cp /home/pi/companion/dhcp-server-conf /home/pi
+        cp /home/pi/companion/dhcp-server-defaults /home/pi 
+
+        #Source configuration for dhcp server in the default configuration files
+        sudo sh -c "echo 'include \"/home/pi/dhcp-server-conf\";' >> /etc/dhcp/dhcpd.conf"
+        sudo sh -c "echo '. /home/pi/dhcp-server-defaults' >> /etc/default/isc-dhcp-server"
+
+        #Copy mapping script from companion directory to home directory
+        cp /home/pi/companion/eth0-mapping-config.sh /home/pi
+
+        #Copy network configuration information to network-conf
+        cp /home/pi/companion/network-conf /home/pi
         echo "isc-dhcp-server installed"
     fi
 done
@@ -256,18 +271,6 @@ done
 #Delete ip address if present from /boot/cmdline.txt
 # e.g. sed command removes any ip address with any combination of digits [0-9] between decimal points
 sudo sed -i -e 's/\s*ip=[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*//' /boot/cmdline.txt
-
-#Copy network configuration files from Companion directory to respective configuration directories
-sudo cp /home/pi/companion/eth0-config /etc/network/interfaces.d/
-sudo cp /home/pi/companion/isc-dhcp-server /etc/default/
-sudo cp /home/pi/companion/dhcpd.conf /etc/dhcp/
-sudo cp /home/pi/companion/interfaces /etc/network/
-
-#Copy mapping script from companion directory to home directory
-cp /home/pi/companion/mapit.sh /home/pi
-
-#Copy network configuration information to network-conf
-cp /home/pi/companion/network-conf /home/pi
 
 sudo sed -i '\%stopscreens%d' ~/.bash_aliases
 echo "alias stopscreens=\"screen -ls | grep Detached | cut -d. -f1 | awk '{print \$1}' | xargs kill\"" >> ~/.bash_aliases
