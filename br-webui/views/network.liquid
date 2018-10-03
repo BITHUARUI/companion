@@ -372,6 +372,13 @@ socket.on('current ip', function(data) {
 </div>
 <script>
 
+function hideAdvancedOptions() {
+	var div = document.getElementsByClassName("advanced");
+	for (var i=0; i<div.length; i++) {
+		div[i].style.display = "none";
+	}
+}
+
 function onToggleAdvancedSwitch() {
 	var div = document.getElementsByClassName("advanced");
 	console.log(div);
@@ -384,6 +391,8 @@ function onToggleAdvancedSwitch() {
 		}
 	}
 }
+
+hideAdvancedOptions();
 
 //onToggleAdvancedSwitch();
 //setInterval(onToggleAdvancedSwitch, 200);
