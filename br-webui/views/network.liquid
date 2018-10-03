@@ -311,7 +311,7 @@ socket.on('current ip', function(data) {
 					Ethernet Configuration
 				</h3>
 			</div>
-			<div class="panel-body"  id="eth-conf">
+			<div class="panel-body advanced">
 				<h4 id="ethernet-ip">Current IP:</h4>
 				<dl class="dl-horizontal">
 					<button type="button" class="btn btn-primary"
@@ -373,14 +373,14 @@ socket.on('current ip', function(data) {
 <script>
 
 function onToggleAdvancedSwitch() {
-	var div = document.getElementById("eth-conf");
+	var div = document.getElementsByClassName("advanced");
 	console.log(div);
-	console.log("Entered function");
-	for (var node in div.childNodes) {
+	for (var i=0; i<div.length; i++) {
+		console.log(div[i]);
 		if (document.getElementById("advanced-checkbox").checked) {
-        	node.style.display = "block";
+        	div[i].style.display = "none";
 		} else {
-	   	 	node.style.display = "none";
+	   	 	div[i].style.display = "block";
 		}
 	}
 }
