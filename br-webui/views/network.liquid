@@ -275,7 +275,7 @@ socket.on('current ip', function(data) {
 			</div>
 			<div class="panel-body">
 				<form onsubmit="joinNetwork(); return false">
-					<h3>Wifi SSID:</h3>
+					<h3 class="advanced-only">Wifi SSID:</h3>
 					<select class="form-control" id="ssid" style="width: 200px;"></select>
 					<h3>Password:</h3>
 					<div class="form-group">
@@ -287,7 +287,7 @@ socket.on('current ip', function(data) {
 			</div>
 		</div>
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-6 advanced-only">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">Wifi Status</h3>
@@ -311,7 +311,7 @@ socket.on('current ip', function(data) {
 					Ethernet Configuration
 				</h3>
 			</div>
-			<div class="panel-body"  id="eth-conf">
+			<div class="panel-body advanced-only"  id="eth-conf">
 				<h4 id="ethernet-ip">Current IP:</h4>
 				<dl class="dl-horizontal">
 					<button type="button" class="btn btn-primary"
@@ -373,14 +373,17 @@ socket.on('current ip', function(data) {
 <script>
 
 function onToggleAdvancedSwitch() {
-	var div = document.getElementById("eth-conf");
-	console.log(div);
+	var list = document.getElementsByClassName("advanced-only");
+	console.log(list);
 	console.log("Entered function");
-	for (var node in div.childNodes) {
+	for (var i = 0; i < list.length; i++) {
+
+        el = list[i]
+        console.log(el)
 		if (document.getElementById("advanced-checkbox").checked) {
-        	node.style.display = "block";
+        	el.style.display = "block";
 		} else {
-	   	 	node.style.display = "none";
+	   	 	el.style.display = "none";
 		}
 	}
 }
