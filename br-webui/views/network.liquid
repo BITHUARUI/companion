@@ -311,14 +311,14 @@ socket.on('current ip', function(data) {
 					Ethernet Configuration
 				</h3>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body"  id="eth-conf">
 				<h4 id="ethernet-ip">Current IP:</h4>
 				<dl class="dl-horizontal">
 					<button type="button" class="btn btn-primary"
 						id="eth0 ip button" onclick="setCompanionEthernetIP()">
 						Change Companion Default Ethernet IP</button>
 				</dl>
-				<dl class="dl-horizontal" id="eth-conf">
+				<dl class="dl-horizontal">
 					<h4> Current Configuration: <span id="current-config"></span></h4>
 					<h4 id="configure"> Companion Network Settings: </h4>
 					<input type="radio" name="config" id="manual"/> Manual (default)
@@ -374,15 +374,19 @@ socket.on('current ip', function(data) {
 
 function onToggleAdvancedSwitch() {
 	var div = document.getElementById("eth-conf");
-	if (document.getElementById("advanced-checkbox").checked) {
-        div.style.display = "block";
-	} else {
-	    div.style.display = "none";
+	console.log(div);
+	console.log("Entered function");
+	for (var node in div.childNodes) {
+		if (document.getElementById("advanced-checkbox").checked) {
+        	node.style.display = "block";
+		} else {
+	   	 	node.style.display = "none";
+		}
 	}
 }
 
-onToggleAdvancedSwitch();
-setInterval(onToggleAdvancedSwitch, 200);
+//onToggleAdvancedSwitch();
+//setInterval(onToggleAdvancedSwitch, 200);
 
 </script>
 {% include ../_includes/footer.liquid %}
