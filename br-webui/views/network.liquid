@@ -318,7 +318,7 @@ socket.on('current ip', function(data) {
 						id="eth0 ip button" onclick="setCompanionEthernetIP()">
 						Change Companion Default Ethernet IP</button>
 				</dl>
-				<dl class="dl-horizontal">
+				<dl class="dl-horizontal" id="eth-conf">
 					<h4> Current Configuration: <span id="current-config"></span></h4>
 					<h4 id="configure"> Companion Network Settings: </h4>
 					<input type="radio" name="config" id="manual"/> Manual (default)
@@ -370,5 +370,19 @@ socket.on('current ip', function(data) {
 		</div>
 	</div>
 </div>
+<script>
 
+function onToggleAdvancedSwitch() {
+	var div = document.getElementById("eth-conf");
+	if (document.getElementById("advanced-checkbox").checked) {
+        div.style.display = "block";
+	} else {
+	    div.style.display = "none";
+	}
+}
+
+onToggleAdvancedSwitch();
+setInterval(onToggleAdvancedSwitch, 200);
+
+</script>
 {% include ../_includes/footer.liquid %}
